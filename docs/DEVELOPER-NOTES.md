@@ -137,6 +137,48 @@ Because `RoundRobinSiteOutput` is **not** version‑controlled, it must contain 
 
 ---
 
+# 🔄 Round Robin Site Generation Flow (Diagram)
+
+The following diagram shows how data moves through the full Round Robin generation pipeline,
+from the master spreadsheet to the final static site served locally.
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│        RoundRobinTT.github.io (main branch, /docs)           │
+│  (Authoritative assets + logos used during local preview)    │
+│                                                              │
+│   /docs/assets        /docs/logos                            │
+└───────────▲───────────────────────────────▲──────────────────┘
+            │                               │
+            │ (optional local-only copy)    │
+            │                               │
+            │                               │
+┌───────────┴───────────────────────────────┴──────────────────┐
+│        WellandValleyCC.github.io (master branch)             │
+│                                                              │
+│   data/ClubEvents_YYYY.xlsx                                  │
+│            │                                                 │
+│            │ python3 scripts/extract_club_events.py          │
+│            ▼                                                 │
+│   data/extracted/YYYY/   (CSV files)                         │
+│            │                                                 │
+│            │ ClubProcessor.exe --mode events                 │
+│            ▼                                                 │
+│   SQLite database (Round Robin event tables)                 │
+│            │                                                 │
+│            │ ClubSiteGenerator.exe --year YYYY               │
+│            ▼                                                 │
+│   RoundRobinSiteOutput/   (generated static site)            │
+└───────────┬──────────────────────────────────────────────────┘
+            │
+            │ dotnet serve -d RoundRobinSiteOutput -o
+            ▼
+┌──────────────────────────────────────────────────────────────┐
+│                 Local Preview in Browser                     │
+│        (fully generated Round Robin static website)          │
+└──────────────────────────────────────────────────────────────┘
+```
+
 # ⚙️ Optional: Automatic Copying of Assets & Logos (Local Only)
 
 For convenience, you may choose to automate the copying of:
