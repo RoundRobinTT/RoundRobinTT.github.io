@@ -1,12 +1,12 @@
 # Logos
 
-This directory contains **brand identity assets** used by the Round Robin TT Series and participating clubs. These files are global, stable, and reused across multiple pages of the Round Robin site.
+This directory contains the **brand identity assets** used by the Round Robin TT Series and the participating clubs. These files are stable, global identity elements and are reused across multiple pages of the site.
 
-They are **not** page‑specific or decorative images. Only identity assets belong here.
+They are **not** decorative or content images. Only identity assets belong here.
 
 ---
 
-## Folder Structure
+## Current Folder Structure
 
 ```
 /logos
@@ -20,72 +20,73 @@ They are **not** page‑specific or decorative images. Only identity assets belo
         rr-header-2026.png
 ```
 
-### What each group represents
+### What these files represent
 
 - **Club logos (top level)**  
-  Logos for participating clubs in the Round Robin TT Series.  
-  These are used throughout the site wherever club identity is displayed.
+  Logos for each club participating in the Round Robin TT Series:
+  - HCRC  
+  - KCC  
+  - LFCC  
+  - Ratae  
+  - RFW  
+  - WVCC  
 
 - **Round Robin branding (`/round-robin`)**  
   Assets representing the Round Robin TT Series itself.  
-  These are global identity files, not tied to any single page.
+  Currently:
+  - `rr-header-2026.png` — the 2026 Round Robin header/branding graphic
 
 ---
 
-## Source of Truth
+## Purpose
 
-Logos exist in **two places**:
+This folder provides a single, predictable location for all identity assets used by the Round Robin site.  
+It keeps branding separate from:
 
-1. **Published site source (authoritative copy)**  
+- CSS  
+- content images  
+- page‑specific assets  
+- decorative graphics  
+
+Those belong in `/assets`.
+
+---
+
+## Workflow Notes
+
+The logos exist in **two places** during development:
+
+1. **Authoritative copy (published site)**  
    `RoundRobinTT.github.io/docs/logos`  
-   This is the version that GitHub Pages serves publicly.
+   This is the version served by GitHub Pages.
 
-2. **Local development output (generated, ignored by git)**  
+2. **Local development copy (generated)**  
    `WellandValleyCC.github.io/RoundRobinSiteOutput/logos`  
-   This copy is required so that local development (`dotnet serve`) renders pages correctly.
+   This folder is created during local builds and is **ignored by git**.
 
-Because the output folder is ephemeral and excluded from version control, the logos must be **manually copied** into both locations when new assets are added.
+When adding new logos:
 
-This duplication is intentional and pragmatic:  
-logo changes are rare, and this avoids brittle cross‑repo dependencies.
+1. Add them here in the RoundRobin repo (this is the source of truth).  
+2. Copy the updated folder into `RoundRobinSiteOutput/logos` so local dev renders correctly.
 
----
-
-## Workflow for Adding New Logos
-
-1. Add the new logo to:  
-   `RoundRobinTT.github.io/docs/logos`  
-   (or `docs/logos/round-robin` if it’s Round Robin branding)
-
-2. Copy the same file into:  
-   `WellandValleyCC.github.io/RoundRobinSiteOutput/logos`
-
-3. Run the local server to verify:  
-   ```
-   dotnet serve -d RoundRobinSiteOutput -o
-   ```
-
-4. Commit only the change in the **RoundRobinTT.github.io** repo.  
-   The WVCC copy is local‑only and should not be committed.
+Because logo changes are rare and typically additive, maintaining the two copies manually is a simple and reliable workflow.
 
 ---
 
 ## Naming Conventions
 
-- Use clear, descriptive filenames (e.g., `wvcc.png`, `hcrc.png`).
-- For Round Robin branding, use versioned names (e.g., `rr-header-2026.png`) to avoid cache issues.
-- Keep all filenames lowercase for consistency.
+- Use short, lowercase filenames for club logos (e.g., `wvcc.png`, `hcrc.png`).  
+- Use versioned filenames for Round Robin branding (e.g., `rr-header-2026.png`) to avoid browser cache issues.  
+- Keep names descriptive and consistent.
 
 ---
 
 ## Guidelines
 
 - Only store **identity** assets here.  
-  Do not place photos, decorative images, or content graphics in this folder.
+  If the image represents a club or the Round Robin brand, it belongs in this folder.
 
-- Keep the structure tidy and intention‑revealing.  
-  Future contributors should immediately understand where each type of logo belongs.
+- Do **not** store photos, decorative images, or content graphics here.  
+  Those belong in `/assets`.
 
-- When in doubt:  
-  If the image represents a **club** or the **Round Robin brand**, it belongs here.  
-  If it represents **content**, it belongs in `/assets`.
+- Keep the structure tidy and intention‑revealing for future maintainers.
