@@ -288,6 +288,18 @@ table.results td.bronze,
     font-weight: 600;
 }
 
+.rr-hero {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.rr-header {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 footer {
     margin-top: 2rem;
     padding-top: 1rem;
