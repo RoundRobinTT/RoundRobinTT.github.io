@@ -1,4 +1,11 @@
-﻿/* ============================
+﻿:root {
+    --border-color: #ccc;
+    --text-color: #333;
+    --background: #fff;
+    --hover-background: #f0f0f0;
+}
+
+/* ============================
    Calendar Grid Styling
    =========================== */
 .month {
@@ -93,6 +100,30 @@ html, body {
     line-height: 1.4;
     margin: 0;
     padding: 0;
+}
+
+/* Match club site header typography */
+body.rr.event-page .event-header-core h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+}
+
+body.rr.event-page .event-header-core .event-number {
+    font-weight: 600; /* same as club site */
+    margin-right: 0.25rem;
+	font-size: 1.2rem;
+}
+
+body.rr.event-page .event-header-core .event-date,
+body.rr.event-page .event-header-core .event-distance {
+    font-size: 1rem;
+    color: #555;
+    margin: 0.2rem 0;
+}
+
+body.rr.event-page .event-header-core {
+    line-height: 1.3;
 }
 
 /* ===========================
@@ -370,7 +401,7 @@ body.rr.event-page a:hover {
 body.rr.event-page .header-and-legend {
     padding: 1.5rem;
     border-bottom: 1px solid #ddd;
-    background: #fafafa;
+    background: transparent;
 }
 
 body.rr.event-page .event-header-core h1 {
@@ -385,23 +416,67 @@ body.rr.event-page .event-header-core .event-distance {
     color: #555;
 }
 
+.rr-banner-header {
+    position: relative;
+    padding: 2rem 1rem;
+}
+
+.rr-banner-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../logos/round-robin/rr-header-2026.png");
+    background-size: cover;          /* fill width, crop vertically */
+    background-repeat: no-repeat;
+    background-position: center;     /* keep the middle of the image visible */
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.rr-banner-header > * {
+    position: relative; /* ensures text sits above the banner */
+}
+
 /* ---------------------------------------------------------
    Navigation
 --------------------------------------------------------- */
 
+.event-nav a.prev::before,
+.competition-nav a.prev::before { content: "←"; }
+.event-nav a.next::after,
+.competition-nav a.next::after { content: "→"; }
+
+/* ---------------------------------------------------------
+   Navigation — Prev left, Index centre, Next right
+--------------------------------------------------------- */
+
 body.rr.event-page .event-nav {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-between; /* pushes prev and next to edges */
+    align-items: center;
     margin-top: 1.2rem;
+    width: 100%;
 }
 
-body.rr.event-page .event-nav .prev::before {
-    content: "« ";
+/* Ensure the Index pill stays centred even if prev/next are missing */
+body.rr.event-page .event-nav .index {
+    margin: 0 auto;
 }
 
-body.rr.event-page .event-nav .next::after {
-    content: " »";
+/* Base pill styling (unchanged) */
+.event-nav a {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--text-color);
+    background: var(--background);
+}
+
+.event-nav a:hover {
+    background: var(--hover-background);
 }
 
 /* ---------------------------------------------------------
